@@ -1,0 +1,38 @@
+﻿  maincpp.cpp
+C:\c\Project562\maincpp.cpp(34,79): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\c\Project562\maincpp.cpp(34,67): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\c\Project562\maincpp.cpp(42,79): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\c\Project562\maincpp.cpp(42,67): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+  Project562.vcxproj -> C:\c\Project562\x64\Debug\Project562.exe

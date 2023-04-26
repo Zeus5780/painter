@@ -1,0 +1,96 @@
+#include "SFML\Graphics.hpp"
+#include <iostream>
+#include <vector>
+#include "windows.h"
+
+int main()
+{
+    using namespace sf;
+
+    std::vector<VertexArray> vertices;
+    vertices.push_back(VertexArray());
+    vertices[0].setPrimitiveType(sf::LinesStrip);
+    int lines_number = 0;
+    int locked = false;
+
+    Color curr_col = Color::White;// цвет кисточки
+    Vector2i last_Mouse_pos(0, 0);
+
+    RenderWindow window(VideoMode(1440, 900), "Click on the button to close the drawer", Style::Close); //размер окна
+    Vector2f Border_Offset(-5, -25);
+    RectangleShape closer(Vector2f(20, 20));//размер кнопки 
+    closer.setFillColor(Color(0, 255, 0));
+
+
+    while (window.isOpen())
+    {
+        Vector2i mousePoz = Mouse::getPosition(window);
+
+        Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == Event::MouseButtonPressed)
+                if (event.key.code == Mouse::Left)
+                    if (closer.getGlobalBounds().contains(mousePoz.x, mousePoz.y))
+                    {
+                        closer.setFillColor(Color(255, 0, 0));
+                    }
+
+
+            if (event.type == Event::MouseButtonReleased)
+                if (event.key.code == Mouse::Left)
+                    if (closer.getGlobalBounds().contains(mousePoz.x, mousePoz.y))
+                    {
+                        closer.setFillColor(Color(0, 255, 0));
+                        Sleep(30);
+                        window.close();
+                    }
+
+            if (event.type == Event::KeyPressed)
+                if (event.key.code == Keyboard::Key::Escape)
+                    window.close();
+            if (event.type == Event::Closed)
+                window.close();
+
+            if (event.type == Event::MouseButtonPressed)
+            {
+                locked = true;
+
+            }
+
+            if (event.type == Event::MouseButtonReleased)
+            {
+
+                lines_number++;
+                vertices.push_back(VertexArray());
+                vertices[lines_number].setPrimitiveType(LinesStrip);
+
+                locked = false;
+            }
+        }
+
+        if (locked)
+        {
+            if (last_Mouse_pos != Mouse::getPosition())
+            {
+
+                vertices[lines_number].append(Vertex(Vector2f(Mouse::getPosition().x - window.getPosition().x + Border_Offset.x, Mouse::getPosition().y - window.getPosition().y + Border_Offset.y), curr_col));
+
+                last_Mouse_pos = Mouse::getPosition();
+            }
+        }
+
+        window.clear(sf::Color::Black); // цвет окна 
+        window.draw(closer);
+
+        for (int i = 0; i < vertices.size(); i++)
+        {
+            window.draw(vertices[i]);
+        }
+
+        window.display();
+    }
+
+
+    return 0;
+}
