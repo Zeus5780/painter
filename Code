@@ -18,7 +18,7 @@ int main()
 
     RenderWindow window(VideoMode(1440, 900), "Click on the button to close the drawer", Style::Close); //размер окна
     Vector2f Border_Offset(-5, -25);
-    RectangleShape closer(Vector2f(20, 20));
+    RectangleShape closer(Vector2f(20, 20));// размер кнопки 
     closer.setFillColor(Color(0, 255, 0));
 
 
